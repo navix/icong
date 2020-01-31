@@ -1,6 +1,6 @@
 {
-  "name": "ngk-icon",
-  "version": "0.0.1",
+  "name": "@novyk/ngk-icon",
+  "version": "1.0.0-beta.1",
   "peerDependencies": {
     "@angular/common": "^9.0.0-rc.12",
     "@angular/core": "^9.0.0-rc.12",

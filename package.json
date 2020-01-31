@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "lib:build": "ng run ngk-icon:build",
+    "lib:publish": "npm publish ./dist/ngk-icon --access=public",
+    "lib:publish:beta": "npm publish ./dist/ngk-icon --access=public --tag=beta",
     "website:serve": "ng run website:serve",
     "website:build": "ng run website:build",
     "website:deploy": "ng run website:deploy --cname=ngk-icon.novyk.org"
