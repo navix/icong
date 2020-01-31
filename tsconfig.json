@@ -17,7 +17,17 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "lib": [
+        "dist/lib/lib",
+        "dist/lib"
+      ],
+      "ngk-icon": [
+        "dist/ngk-icon/ngk-icon",
+        "dist/ngk-icon"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
