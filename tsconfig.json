@@ -23,9 +23,9 @@
         "dist/lib/lib",
         "dist/lib"
       ],
-      "ngk-icon": [
-        "dist/ngk-icon/ngk-icon",
-        "dist/ngk-icon"
+      "sx-icon": [
+        "dist/sx-icon/sx-icon",
+        "dist/sx-icon"
       ]
     }
   },

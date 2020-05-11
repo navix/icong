@@ -1,17 +1,17 @@
 {
-  "name": "ngk-icon",
+  "name": "sx-icon-src",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "lib:build": "ng run ngk-icon:build",
-    "lib:publish": "npm publish ./dist/ngk-icon --access=public",
-    "lib:publish:beta": "npm publish ./dist/ngk-icon --access=public --tag=beta",
+    "lib:build": "ng run sx-icon:build:production && cpx ./README.md ./dist/sx-icon",
+    "lib:publish": "npm publish ./dist/sx-icon --access=public",
+    "lib:publish:beta": "npm publish ./dist/sx-icon --access=public --tag=beta",
     "website:serve": "ng run website:serve",
     "website:build": "ng run website:build",
-    "website:deploy": "ng run website:deploy --cname=ngk-icon.novyk.org"
+    "website:deploy": "ng run website:deploy --cname=sx-icon.novyk.org"
   },
   "private": true,
   "dependencies": {
@@ -38,6 +38,7 @@
     "@types/node": "^12.11.1",
     "angular-cli-ghpages": "^0.6.2",
     "codelyzer": "^5.1.2",
+    "cpx": "^1.5.0",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.3.0",
