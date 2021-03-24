@@ -128,38 +128,38 @@
         }
       }
     },
-    "sx-icon": {
+    "ikong": {
       "projectType": "library",
-      "root": "projects/sx-icon",
-      "sourceRoot": "projects/sx-icon/src",
+      "root": "projects/ikong",
+      "sourceRoot": "projects/ikong/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "projects/sx-icon/tsconfig.lib.json",
-            "project": "projects/sx-icon/ng-package.json"
+            "tsConfig": "projects/ikong/tsconfig.lib.json",
+            "project": "projects/ikong/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/sx-icon/tsconfig.lib.prod.json"
+              "tsConfig": "projects/ikong/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/sx-icon/src/test.ts",
-            "tsConfig": "projects/sx-icon/tsconfig.spec.json",
-            "karmaConfig": "projects/sx-icon/karma.conf.js"
+            "main": "projects/ikong/src/test.ts",
+            "tsConfig": "projects/ikong/tsconfig.spec.json",
+            "karmaConfig": "projects/ikong/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/sx-icon/tsconfig.lib.json",
-              "projects/sx-icon/tsconfig.spec.json"
+              "projects/ikong/tsconfig.lib.json",
+              "projects/ikong/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -169,7 +169,7 @@
       }
     }
   },
-  "defaultProject": "sx-icon",
+  "defaultProject": "ikong",
   "cli": {
     "analytics": "fddfa27e-b9b8-4b94-9edc-fa7a22d92a03"
   }

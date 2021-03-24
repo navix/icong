@@ -2,7 +2,12 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "../../out-tsc/app",
-    "types": []
+    "types": [],
+    "paths": {
+      "@novyk/ikong": [
+        "projects/ikong/src/public-api"
+      ]
+    }
   },
   "files": [
     "src/main.ts",

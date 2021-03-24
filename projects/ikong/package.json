@@ -1,0 +1,9 @@
+{
+  "name": "@novyk/ikong",
+  "version": "11.0.0-beta.1",
+  "peerDependencies": {
+    "@angular/common": "^11.0.0",
+    "@angular/core": "^11.0.0",
+    "rxjs": "^6.0.0"
+  }
+}

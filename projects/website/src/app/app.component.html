@@ -1,12 +1,24 @@
 <header>
-  <h1>sx-icon</h1>
-  <h2>SVG icons component for Angular</h2>
+  <h1>IKONG</h1>
+  <h2>SVG icons plugin for Angular</h2>
 </header>
 
 <main>
   WIP v2
+  <svg style="color: blue" fill="currentColor">
+    <use xlink:href="#menu"/>
+  </svg>
+  <svg style="color: green" fill="currentColor">
+    <use xlink:href="#menu"/>
+  </svg>
+
+  <a routerLink="/lazy">Lazy</a>
+
+  <router-outlet></router-outlet>
 </main>
 
 <footer>
   Crafted by Oleksa Novyk.
 </footer>
+
+<icons-host></icons-host>

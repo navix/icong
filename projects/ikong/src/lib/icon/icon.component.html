@@ -1,0 +1,3 @@
+<svg:title *ngIf="title" [id]="titleId">{{ title }}</svg:title>
+<svg:desc *ngIf="desc" [id]="descId">{{ desc }}</svg:desc>
+<svg:use [attr.href]="'#' + icon" />
