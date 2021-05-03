@@ -14,6 +14,7 @@ export class IconsHostComponent implements OnInit {
     orig: Icon;
     html: SafeHtml;
     viewBox?: string;
+    fill?: string;
   }[];
 
   constructor(
@@ -24,23 +25,24 @@ export class IconsHostComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.registry.icons$.subscribe(icons => {
-      this.icons = icons.map(icon => {
-        const prepared = icon.xml
-          .trim()
-          .replace(/(\r\n|\n|\r)/gm, '');
-        console.log('uf', prepared.match(/^<svg.*?viewBox="(.*?)".*?>/));
-        return {
-          orig: icon,
-          html: this.sanitizer.bypassSecurityTrustHtml(prepared
-            .replace(/^<svg.*?>/, '')
-            .replace(/<\/svg.*?>$/, ''),
-          ),
-          viewBox: prepared.match(/^<svg.*?viewBox="(.*?)".*?>/)?.[1],
-        };
+    this.registry
+      .icons$
+      .subscribe(icons => {
+        this.icons = icons.map(icon => {
+          const prepared = icon.xml
+            .trim()
+            .replace(/(\r\n|\n|\r)/gm, '');
+          return {
+            orig: icon,
+            html: this.sanitizer.bypassSecurityTrustHtml(prepared
+              .replace(/^<svg.*?>/, '')
+              .replace(/<\/svg.*?>$/, ''),
+            ),
+            viewBox: prepared.match(/^<svg.*?viewBox="(.*?)".*?>/)?.[1],
+            fill: prepared.match(/^<svg.*?fill="(.*?)".*?>/)?.[1],
+          };
+        });
+        this.cdr.markForCheck();
       });
-      console.log('ICNS', this.icons);
-      this.cdr.markForCheck();
-    });
   }
 }

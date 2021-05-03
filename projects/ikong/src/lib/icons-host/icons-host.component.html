@@ -11,6 +11,7 @@
       *ngFor="let icon of icons"
       [attr.id]="icon.orig.name"
       [attr.viewBox]="icon.viewBox"
+      [attr.fill]="icon.fill"
       [innerHtml]="icon.html"
     >
     </symbol>
