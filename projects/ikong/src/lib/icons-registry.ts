@@ -17,7 +17,7 @@ import { Icon, IconCached, IconSource } from './meta';
  * ]);
  * ```
  *
- * Use in a template
+ * Use in a template:
  *
  * ```html
  * <ikong name="star"></ikong>
@@ -30,8 +30,6 @@ export class IconsRegistry {
   #icons = new BehaviorSubject<Icon[]>([]);
 
   private cache: IconCached[] = [];
-
-  private icons: Icon[] = [];
 
   constructor(
     private http: HttpClient,
@@ -49,9 +47,9 @@ export class IconsRegistry {
     return this.#icons.asObservable();
   }
 
-//  get icons() {
-//    return this._icons.value;
-//  }
+  get icons() {
+    return this.#icons.value;
+  }
 
   /**
    * Add icons to registry.
@@ -65,8 +63,7 @@ export class IconsRegistry {
       }
     });
     // Merge
-    this.icons = [...this.icons, ...icons];
-    this.#icons.next(this.icons);
+    this.#icons.next([...this.icons, ...icons]);
   }
 
   /**

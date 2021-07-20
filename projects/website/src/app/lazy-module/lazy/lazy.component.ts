@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IconsRegistry } from '@novyk/ikong';
-import { bookIcon } from '../../icons';
+import { bookIcon, dropIcon } from '../../icons';
 import { homeIcon } from '../../icons2';
 
 @Component({
@@ -16,6 +16,7 @@ export class LazyComponent implements OnInit {
     this.iconsRegistry.add([
       bookIcon(),
       homeIcon,
+      dropIcon,
     ]);
   }
 
