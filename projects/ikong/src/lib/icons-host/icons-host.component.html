@@ -8,8 +8,8 @@
 >
   <defs>
     <symbol
-      *ngFor="let icon of icons"
-      [attr.id]="icon.orig.name"
+      *ngFor="let icon of icons; trackBy: trackByFn"
+      [attr.id]="icon.name"
       [attr.viewBox]="icon.viewBox"
       [attr.fill]="icon.fill"
       [innerHtml]="icon.html"

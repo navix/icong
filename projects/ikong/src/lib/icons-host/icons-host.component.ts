@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { IconsRegistry } from '../icons-registry';
-import { Icon } from '../meta';
 
 @Component({
   selector: 'icons-host',
@@ -10,12 +9,12 @@ import { Icon } from '../meta';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconsHostComponent implements OnInit {
-  icons?: {
-    orig: Icon;
+  icons: {
+    name: string;
     html: SafeHtml;
     viewBox?: string;
     fill?: string;
-  }[];
+  }[] = [];
 
   constructor(
     private registry: IconsRegistry,
@@ -26,23 +25,33 @@ export class IconsHostComponent implements OnInit {
 
   ngOnInit() {
     this.registry
-      .icons$
+      .reqIcons$
       .subscribe(icons => {
-        this.icons = icons.map(icon => {
-          const prepared = icon.xml
-            .trim()
-            .replace(/(\r\n|\n|\r)/gm, '');
-          return {
-            orig: icon,
-            html: this.sanitizer.bypassSecurityTrustHtml(prepared
-              .replace(/^<svg.*?>/, '')
-              .replace(/<\/svg.*?>$/, ''),
-            ),
-            viewBox: prepared.match(/^<svg.*?viewBox="(.*?)".*?>/)?.[1],
-            fill: prepared.match(/^<svg.*?fill="(.*?)".*?>/)?.[1],
-          };
-        });
+        const newIcons = icons
+          // Add only new icons
+          .filter(icon => !this.icons.find(localIcon => localIcon.name === icon.name))
+          // Map to local obj
+          .map(icon => {
+            const prepared = icon.xml
+              .trim()
+              .replace(/(\r\n|\n|\r)/gm, '');
+            return {
+              name: icon.name,
+              html: this.sanitizer.bypassSecurityTrustHtml(prepared
+                .replace(/^<svg.*?>/, '')
+                .replace(/<\/svg.*?>$/, ''),
+              ),
+              viewBox: prepared.match(/^<svg.*?viewBox="(.*?)".*?>/)?.[1],
+              fill: prepared.match(/^<svg.*?fill="(.*?)".*?>/)?.[1],
+            };
+          });
+        console.log('PUSH', newIcons);
+        this.icons.push(...newIcons);
         this.cdr.markForCheck();
       });
+  }
+
+  trackByFn(index, item: {name: string}) {
+    return item.name;
   }
 }

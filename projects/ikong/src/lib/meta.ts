@@ -1,19 +1,28 @@
 import { SafeHtml } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
 
-export interface Icon {
-  // @todo rename to id ??
+export type Icon = XmlIcon | UrlIcon;
+
+export interface XmlIcon {
   name: string;
-  url?: string;
+  xml: string;
+}
+
+export interface UrlIcon {
+  name: string;
+  url: string;
+}
+
+export interface RegisteredIcon {
+  name: string;
   xml?: string;
-  size?: string;
+  url?: string;
+  requested: boolean;
 }
 
-export interface IconSource {
-  svg: string;
-  size?: string;
-}
-
+/**
+ * @internal
+ */
 export interface IconCached {
   name: string;
   svg: BehaviorSubject<SafeHtml | null>;

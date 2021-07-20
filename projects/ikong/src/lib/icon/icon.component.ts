@@ -8,9 +8,8 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { Subject } from 'rxjs';
-import { filter, switchMap, takeUntil } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 import { IconsRegistry } from '../icons-registry';
-import { IconSource } from '../meta';
 
 /**
  * Component for rendering svg icon.
@@ -48,8 +47,6 @@ export class IconComponent implements OnChanges, OnDestroy {
    */
     // @Input() intersectionLoad = false;
 
-  source: IconSource;
-
   private destroy = new Subject<void>();
 
   private svg: SVGElement;
@@ -59,7 +56,6 @@ export class IconComponent implements OnChanges, OnDestroy {
   constructor(
     private registry: IconsRegistry,
   ) {
-    // Handle icon displayed by name
     this.nameChanges
       .pipe(
         takeUntil(this.destroy),
@@ -74,15 +70,15 @@ export class IconComponent implements OnChanges, OnDestroy {
         //     )
         //     : from([name]);
         // }),
-        switchMap((name: string) => this.registry.get(name)),
+//        switchMap((name: string) => this.registry.get(name)),
       )
-      .subscribe((source: IconSource) => {
-        this.source = source;
+      .subscribe(name => {
+        this.registry.req(name);
       });
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if ('name' in changes) {
+    if ('icon' in changes) {
       this.nameChanges.next(this.icon);
     }
     if ('title' in changes || 'desc' in changes) {
