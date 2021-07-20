@@ -5,7 +5,6 @@ import { IconsRegistry } from '../icons-registry';
 @Component({
   selector: 'icons-host',
   templateUrl: './icons-host.component.html',
-  styleUrls: ['./icons-host.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconsHostComponent implements OnInit {

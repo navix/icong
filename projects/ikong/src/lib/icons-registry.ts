@@ -1,25 +1,40 @@
 import { isPlatformBrowser } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable, Optional, PLATFORM_ID } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Icon, IconCached, RegisteredIcon, UrlIcon, XmlIcon } from './meta';
+import { catchError } from 'rxjs/operators';
+import { Icon, UrlIcon, XmlIcon } from './meta';
+
+interface RegisteredIcon {
+  name: string;
+  xml?: string;
+  url?: string;
+  requested: boolean;
+}
 
 /**
  * Icons registry.
  *
  * ```typescript
+ * import { IconsRegistry } from '@novyk/ikong';
+ * ...
+ * constructor(
+ *   private iconsRegistry: IconsRegistry,
+ * ) {}
+ * ...
+ * this.iconsRegistry.add({name: 'home', xml: '<svg ...'});
  * this.iconsRegistry.add({name: 'star', url: '/assets/icons/star.svg'});
  * // or
  * this.iconsRegistry.add([
- * {name: 'star', url: '/assets/icons/star.svg'},
- * {name: 'cloud', url: '/assets/icons/cloud.svg'},
+ *   {name: 'home', xml: '<svg ...'},
+ *   {name: 'star', url: '/assets/icons/star.svg'},
  * ]);
  * ```
  *
  * Use in a template:
  *
  * ```html
- * <ikong name="star"></ikong>
+ * <svg icon="home"></svg>
  * ```
  */
 @Injectable({
@@ -50,8 +65,8 @@ export class IconsRegistry {
    * Add icons to registry.
    */
   add(icon: Icon | Icon[]) {
-    const icons = Array.isArray(icon) ? icon : [icon];
     // @todo filter OR check duplicates
+    const icons = Array.isArray(icon) ? icon : [icon];
     this.#icons = [
       ...this.#icons,
       ...icons.map(i => ({
@@ -69,7 +84,6 @@ export class IconsRegistry {
    * Request icon to load (if needed) and draw into the host.
    */
   req(name: string) {
-    // @todo load from URL
     const icon = this.#icons.find(i => i.name === name);
     if (!icon) {
       // @todo error/warning ??
@@ -77,70 +91,38 @@ export class IconsRegistry {
     }
     if (!icon.requested) {
       icon.requested = true;
-      this.updateReqIcons();
+      if (icon.xml) {
+        this.updateReqIcons();
+      }
+      if (icon.url) {
+        this.loadIcon(icon);
+      }
     }
   }
 
-  /**
-   * Get icon by name.
-   *
-   * @internal
-   */
-//  get(name: string): Observable<IconSource> {
-//    const icon = this.icons.find(i => i.name === name);
-//    if (icon) {
-//      // Init cache
-//      const fromCache = this.cache.find(c => c.name === name);
-//      const cached = fromCache
-//        ? fromCache
-//        : {
-//          name,
-//          svg: new BehaviorSubject(null),
-//        };
-//      if (!fromCache) {
-//        // Add cached to the pull
-//        this.cache.push(cached);
-//        if (icon.url) {
-//          if (this.isBrowser) {
-//            // Fetch
-//            return this.http
-//              .get(icon.url, {responseType: 'text'})
-//              .pipe(
-//                tap(svg => cached.svg.next(svg)),
-//                map(svg => ({svg, size: icon.size})),
-//                catchError((error: HttpErrorResponse) => {
-//                  throw new Error(`Svg load failed, url: ${icon.url}, message: ${error.message}`);
-//                }),
-//              );
-//          } else {
-//            return of({svg: ''});
-//          }
-//        } else if (icon.xml) {
-//          // Register xml
-//          cached.svg.next(icon.xml);
-//        }
-//      }
-//      // Return stream
-//      return cached.svg
-//        .asObservable()
-//        .pipe(
-//          filter(svg => svg !== null),
-//          take(1),
-//          map((svg: string) => ({
-//            svg,
-//            size: icon.size,
-//          })),
-//        );
-//    } else {
-//      throw new Error(`Icon "${name}" not found!`);
-//    }
-//  }
-
   private updateReqIcons() {
-    const req = this.#icons.filter(i => i.requested);
+    const req = this.#icons.filter(i => i.requested && i.xml);
     if (req.length !== this.#reqIcons.value.length) {
       console.log('updReqIco', req);
       this.#reqIcons.next(req);
     }
+  }
+
+  private loadIcon(icon: RegisteredIcon) {
+    if (!icon.url) {
+      // @todo warning/error ??
+      return;
+    }
+    return this.http
+      .get(icon.url, {responseType: 'text'})
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          throw new Error(`Svg load failed, url: ${icon.url}, message: ${error.message}`);
+        }),
+      )
+      .subscribe(xml => {
+        icon.xml = xml;
+        this.updateReqIcons();
+      });
   }
 }

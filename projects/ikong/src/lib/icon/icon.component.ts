@@ -49,8 +49,6 @@ export class IconComponent implements OnChanges, OnDestroy {
 
   private destroy = new Subject<void>();
 
-  private svg: SVGElement;
-
   private nameChanges = new Subject<string>();
 
   constructor(
@@ -60,6 +58,7 @@ export class IconComponent implements OnChanges, OnDestroy {
       .pipe(
         takeUntil(this.destroy),
         filter(name => !!name),
+        // @todo deffer load/draw on host
         // switchMap(name => {
         //   // Debounce icon load until being visible (if needed).
         //   return this.intersectionLoad
