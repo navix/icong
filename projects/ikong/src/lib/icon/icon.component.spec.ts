@@ -1,58 +1,48 @@
-import { Component, Injectable, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { from } from 'rxjs';
-import { IconComponent } from './icon.component';
+import { Injectable } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { IconsRegistry } from '../icons-registry';
+import { IconComponent } from './icon.component';
 
-describe('KitIconComponent', () => {
-  let fixture: ComponentFixture<TestComponent>;
-  let icon: IconComponent;
-  let registry: RegistryMock;
-  // setup
-  beforeEach(async(() =>
-    TestBed.configureTestingModule({
+describe('IconComponent', () => {
+  let fixture: ComponentFixture<IconComponent>;
+  let component: IconComponent;
+  let ir: IconsRegistryStub;
+
+  beforeEach(async () =>
+    await TestBed.configureTestingModule({
       imports: [],
       declarations: [
-        TestComponent,
         IconComponent,
       ],
       providers: [
         {
           provide: IconsRegistry,
-          useClass: RegistryMock,
+          useClass: IconsRegistryStub,
         },
       ],
     }).compileComponents(),
-  ));
+  );
+
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestComponent);
-    icon = fixture.componentInstance.icon;
-    registry = TestBed.get(IconsRegistry);
+    fixture = TestBed.createComponent(IconComponent);
+    ir = TestBed.inject(IconsRegistry);
+    component = fixture.componentInstance;
   });
+
   it('should be created', () => {
-    expect(icon).toBeTruthy();
+    expect(component).toBeTruthy();
   });
-  it('should get observable from registry', () => {
-    const spy = spyOn(registry, 'get').and.callThrough();
-    fixture.detectChanges();
-    expect(spy).toHaveBeenCalledWith('icon-name');
+
+  it('should request on name change', () => {
+    const spy = spyOn(ir, 'req');
+    component.icon = 'ICON';
+    component.ngOnChanges({icon: 'ICON'} as any);
+    expect(spy).toHaveBeenCalledWith('ICON');
   });
-  // @todo should re-render on changes
 });
 
 @Injectable()
-class RegistryMock {
-  get(name: string) {
-    return from([{svg: '<svg></svg>'}]);
+class IconsRegistryStub {
+  req(name: string) {
   }
-}
-
-@Component({
-  selector: 'test-cmp',
-  template: `
-    <kng-icon name="icon-name"></kng-icon>
-  `,
-})
-class TestComponent {
-  @ViewChild(IconComponent, /* TODO: add static flag */ {}) icon: IconComponent;
 }

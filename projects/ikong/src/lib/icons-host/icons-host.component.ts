@@ -44,7 +44,6 @@ export class IconsHostComponent implements OnInit {
               fill: prepared.match(/^<svg.*?fill="(.*?)".*?>/)?.[1],
             };
           });
-        console.log('PUSH', newIcons);
         this.icons.push(...newIcons);
         this.cdr.markForCheck();
       });

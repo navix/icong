@@ -57,6 +57,10 @@ export class IconsRegistry {
       : typeof document === 'object' && !!document;
   }
 
+  get icons() {
+    return [...this.#icons];
+  }
+
   get reqIcons$() {
     return this.#reqIcons.asObservable();
   }
@@ -103,7 +107,6 @@ export class IconsRegistry {
   private updateReqIcons() {
     const req = this.#icons.filter(i => i.requested && i.xml);
     if (req.length !== this.#reqIcons.value.length) {
-      console.log('updReqIco', req);
       this.#reqIcons.next(req);
     }
   }

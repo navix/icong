@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "test": "ng test",
+    "test": "ng run ikong:test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "lib:build": "ng run ikong:build:production && cpx ./README.md ./dist/ikong",
