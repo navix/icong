@@ -1,9 +1,21 @@
 {
   "name": "@novyk/ikong",
-  "version": "11.0.0-beta.2",
+  "version": "12.0.0",
+  "description": "Efficient Angular SVG Icons.",
+  "keywords": ["angular", "icons", "svg"],
+  "author": {
+    "name": "Oleksa Novyk",
+    "email": "novyk@pm.me",
+    "url": "https://oleksanovyk.com/"
+  },
+  "repository": {
+    "url": "https://github.com/navix/ikong",
+    "type": "git"
+  },
+  "license": "MIT",
   "peerDependencies": {
-    "@angular/common": "^11.0.0",
-    "@angular/core": "^11.0.0",
+    "@angular/common": "^10.0.0",
+    "@angular/core": "^10.0.0",
     "rxjs": "^6.0.0"
   }
 }
