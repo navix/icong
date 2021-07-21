@@ -1,10 +1,15 @@
-# 🦍 IKONG
+[![npm version](https://badge.fury.io/js/%40novyk%2Fikong.svg)](https://www.npmjs.com/@novyk/ikong)
+![CI](https://github.com/navix/ikong/actions/workflows/ci.yml/badge.svg)
+
+# 🦍 ikong
 
 ## Efficient Angular SVG Icons
 
 Renders icons as symbols in the host, and displays them via `use[href]`.
 
-Features:
+Inspired by this article: https://css-tricks.com/too-many-svgs-clogging-up-your-markup-try-use/
+
+**Features:**
 
 * Renders icons only once in the DOM, then re-use.
 * Load SVG by url or use XML directly.
@@ -22,31 +27,58 @@ $ npm i @novyk/ikong
 
 ## Usage
 
-Place host for symbols rendering (in the root or other shared place):
+Import the module.
+
+```
+import { IconModule } from '@novyk/ikong';
+...
+@NgModule({
+  imports: [
+    ...
+    IconModule,
+```
+
+Place host for symbols rendering (in the root or other shared place). It is invisible.
 
 ```html
 <icons-host></icons-host>
 ```
 
-Add icons to registry:
+Add icons to registry.
 
 ```typescript
+import { IconsRegistry } from '@novyk/ikong';
+...
 constructor(
   private iconsRegistry: IconsRegistry,
 ) {}
 ...
+this.iconsRegistry.add({name: 'home', xml: '<svg ...'});
 this.iconsRegistry.add({name: 'star', url: '/assets/icons/star.svg'});
 // or
 this.iconsRegistry.add([
+  {name: 'home', xml: '<svg ...'},
   {name: 'star', url: '/assets/icons/star.svg'},
-  {name: 'cloud', url: '/assets/icons/cloud.svg'},
-  {name: 'home', xml: '<svg ...'}
 ]);
 ```
 
-Use in a template:
- 
+Display icons in a template:
+
 ```html
+<svg icon="home"></svg>
 <svg icon="star"></svg>
-<svg icon="cloud"></svg>
 ```
+
+### Color
+
+Ikong does not apply any additional changes to the `sgv` code or to the wrappers. You need to manage colors yourself.
+
+I prefer to change `fill` attribute in the `svg` from particular color to `currentColor`. 
+
+### Size
+
+Icons are too different: in sizes, proportions, boldness etc. Then we need to place them in very different environments.  
+
+A non-generalized solution works good here, I prefer to define `svg` sizes in CSS. 
+
+You always can create a wrapper component or directive that will solve exactly your issue.
