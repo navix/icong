@@ -12,5 +12,9 @@ export class AppComponent {
     private iconsRegistry: IconsRegistry,
   ) {
     this.iconsRegistry.add(menuIcon());
+    this.iconsRegistry.add({
+      name: 'lock',
+      url: '/assets/lock.svg',
+    });
   }
 }

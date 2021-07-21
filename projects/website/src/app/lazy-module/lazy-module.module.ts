@@ -4,9 +4,11 @@ import { IconModule } from '@novyk/ikong';
 
 import { LazyModuleRoutingModule } from './lazy-module-routing.module';
 import { LazyComponent } from './lazy/lazy.component';
+import { Lazy2Component } from './lazy2/lazy2.component';
+import { LazyUrlComponent } from './lazy-url/lazy-url.component';
 
 @NgModule({
-  declarations: [LazyComponent],
+  declarations: [LazyComponent, Lazy2Component, LazyUrlComponent],
   imports: [
     CommonModule,
     LazyModuleRoutingModule,

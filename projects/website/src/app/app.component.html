@@ -4,15 +4,21 @@
 </header>
 
 <main>
-  WIP v2
+  Direct xlink:
   <svg style="color: blue">
-    <use xlink:href="#menu"/>
+    <use xlink:href="#menu" />
   </svg>
-  <svg style="color: green">
-    <use xlink:href="#menu"/>
+  Ikong XML:
+  <svg icon="menu" style="color: green">
   </svg>
+  Ikong URL:
+  <svg icon="lock" style="color: orangered"></svg>
 
-  <a routerLink="/lazy">Lazy</a>
+  <div>
+    <a routerLink="/lazy/lazy1">Lazy</a><br>
+    <a routerLink="/lazy/lazy2">Lazy with reg</a><br>
+    <a routerLink="/lazy/lazy-url">Lazy with url load</a><br>
+  </div>
 
   <router-outlet></router-outlet>
 </main>
