@@ -9,6 +9,7 @@
     "lib:build": "ng run ikong:build:production && cpx ./README.md ./dist/ikong",
     "lib:publish": "npm publish ./dist/ikong --access=public",
     "lib:publish:beta": "npm publish ./dist/ikong --access=public --tag=beta",
+    "lib:release": "npm run lib:build && npm run lib:publish",
     "website:serve": "ng run website:serve",
     "website:build": "ng run website:build:production",
     "website:deploy": "ng run website:deploy --cname=ikong.oleksanovyk.com"
