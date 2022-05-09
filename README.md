@@ -1,4 +1,4 @@
-[![npm version](https://badge.fury.io/js/iсong.svg)](https://www.npmjs.com/package/icong)
+[![npm version](https://badge.fury.io/js/icong.svg)](https://www.npmjs.com/package/icong)
 ![CI](https://github.com/navix/icong/actions/workflows/ci.yml/badge.svg)
 
 # 🦍 icong
