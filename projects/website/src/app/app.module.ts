@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { IconModule } from '@novyk/ikong';
+import { IconModule } from 'icong';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';

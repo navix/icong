@@ -16,7 +16,7 @@ interface RegisteredIcon {
  * Icons registry.
  *
  * ```typescript
- * import { IconsRegistry } from '@novyk/ikong';
+ * import { IconsRegistry } from 'icong';
  * ...
  * constructor(
  *   private iconsRegistry: IconsRegistry,

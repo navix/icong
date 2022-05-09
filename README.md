@@ -1,7 +1,7 @@
-[![npm version](https://badge.fury.io/js/%40novyk%2Fikong.svg)](https://www.npmjs.com/@novyk/ikong)
-![CI](https://github.com/navix/ikong/actions/workflows/ci.yml/badge.svg)
+[![npm version](https://badge.fury.io/js/iсong.svg)](https://www.npmjs.com/package/icong)
+![CI](https://github.com/navix/icong/actions/workflows/ci.yml/badge.svg)
 
-# 🦍 ikong
+# 🦍 icong
 
 ## Efficient Angular SVG Icons
 
@@ -21,7 +21,7 @@ Inspired by this article: https://css-tricks.com/too-many-svgs-clogging-up-your-
 ## Installation
 
 ```
-$ npm i @novyk/ikong
+$ npm i icong
 ```
 
 
@@ -30,7 +30,7 @@ $ npm i @novyk/ikong
 Import the module.
 
 ```
-import { IconModule } from '@novyk/ikong';
+import { IconModule } from 'icong';
 ...
 @NgModule({
   imports: [
@@ -47,7 +47,7 @@ Place host for symbols rendering (in the root or other shared place). It is invi
 Add icons to registry.
 
 ```typescript
-import { IconsRegistry } from '@novyk/ikong';
+import { IconsRegistry } from 'icong';
 ...
 constructor(
   private iconsRegistry: IconsRegistry,
@@ -71,14 +71,14 @@ Display icons in a template:
 
 ### Color
 
-Ikong does not apply any additional changes to the `sgv` code or to the wrappers. You need to manage colors yourself.
+Icong does not apply any additional changes to the `sgv` code or to the wrappers. You need to manage colors yourself.
 
 I prefer to change `fill` attribute in the `svg` from particular color to `currentColor`. 
 
 ### Size
 
-Icons are too different: in sizes, proportions, boldness etc. Then we need to place them in very different environments.  
+Icons are too different: in sizes, proportions, boldness etc. Then we need to place them in very different environments.
 
-A non-generalized solution works good here, I prefer to define `svg` sizes in CSS. 
+A non-generalized solution works good here, I prefer to define `svg` sizes in CSS.
 
 You always can create a wrapper component or directive that will solve exactly your issue.

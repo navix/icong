@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IconsRegistry } from '../../../../../ikong/src/lib/icons-registry';
+import { IconsRegistry } from '../../../../../icong/src/lib/icons-registry';
 import { trashIcon } from '../../icons';
 
 @Component({

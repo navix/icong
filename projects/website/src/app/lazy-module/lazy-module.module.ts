@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { IconModule } from '@novyk/ikong';
+import { IconModule } from 'icong';
 
 import { LazyModuleRoutingModule } from './lazy-module-routing.module';
 import { LazyComponent } from './lazy/lazy.component';

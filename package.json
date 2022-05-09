@@ -1,18 +1,18 @@
 {
-  "name": "ikong-src",
+  "name": "icong-src",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "test": "ng run ikong:test",
+    "test": "ng run icong:test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "lib:build": "ng run ikong:build:production && cpx ./README.md ./dist/ikong",
-    "lib:publish": "npm publish ./dist/ikong --access=public",
-    "lib:publish:beta": "npm publish ./dist/ikong --access=public --tag=beta",
+    "lib:build": "ng run icong:build:production && cpx ./README.md ./dist/icong",
+    "lib:publish": "npm publish ./dist/icong --access=public",
+    "lib:publish:beta": "npm publish ./dist/icong --access=public --tag=beta",
     "lib:release": "npm run lib:build && npm run lib:publish",
     "website:serve": "ng run website:serve",
     "website:build": "ng run website:build:production",
-    "website:deploy": "ng run website:deploy --cname=ikong.oleksanovyk.com"
+    "website:deploy": "ng run website:deploy --cname=icong.oleksanovyk.com"
   },
   "private": true,
   "dependencies": {

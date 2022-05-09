@@ -1,15 +1,15 @@
 {
-  "name": "@novyk/ikong",
+  "name": "icong",
   "version": "13.0.0",
   "description": "Efficient Angular SVG Icons.",
   "keywords": ["angular", "icons", "svg"],
   "author": {
     "name": "Oleksa Novyk",
-    "email": "novyk@pm.me",
+    "email": "oleksa@novyk.me",
     "url": "https://oleksanovyk.com/"
   },
   "repository": {
-    "url": "https://github.com/navix/ikong",
+    "url": "https://github.com/navix/icong",
     "type": "git"
   },
   "license": "MIT",

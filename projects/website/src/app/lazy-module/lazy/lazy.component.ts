@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IconsRegistry } from '@novyk/ikong';
+import { IconsRegistry } from 'icong';
 import { bookIcon, dropIcon } from '../../icons';
 import { homeIcon } from '../../icons2';
 

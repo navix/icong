@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IconsRegistry } from '@novyk/ikong';
+import { IconsRegistry } from 'icong';
 import { menuIcon } from './icons';
 
 @Component({

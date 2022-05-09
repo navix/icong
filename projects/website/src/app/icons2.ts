@@ -1,4 +1,4 @@
-import { Icon } from '@novyk/ikong';
+import { Icon } from 'icong';
 
 export const homeIcon: Icon = {
   name: 'home',

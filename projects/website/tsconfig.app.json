@@ -4,8 +4,8 @@
     "outDir": "../../out-tsc/app",
     "types": [],
     "paths": {
-      "@novyk/ikong": [
-        "projects/ikong/src/public-api"
+      "icong": [
+        "projects/icong/src/public-api"
       ]
     }
   },
