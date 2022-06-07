@@ -1,6 +1,6 @@
 {
   "name": "icong",
-  "version": "14.0.0",
+  "version": "14.0.1",
   "description": "Efficient Angular SVG Icons.",
   "keywords": ["angular", "icons", "svg"],
   "author": {
@@ -14,8 +14,7 @@
   },
   "license": "MIT",
   "peerDependencies": {
-    "@angular/common": ">= 10.0.0",
-    "@angular/core": ">= 10.0.0",
-    "rxjs": ">= 6.0.0"
+    "@angular/core": ">= 14.0.0",
+    "rxjs": ">= 7.0.0"
   }
 }
