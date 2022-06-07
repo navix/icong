@@ -17,6 +17,7 @@ Inspired by this article: https://css-tricks.com/too-many-svgs-clogging-up-your-
 * No additional wrapper components, direct access to `svg` element.
 * No magic coloring or sizing.
 
+> [StackBlitz demo](https://stackblitz.com/edit/icong-demo?file=src/app/app.component.ts)
 
 ## Installation
 
