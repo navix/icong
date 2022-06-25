@@ -1,18 +1,5 @@
-<svg
-  height="200"
+<div
+  *ngFor="let render of renders; trackBy: trackByFn"
   style="display: none;"
-  viewBox="0 0 500 200"
-  width="500"
-  xmlns="http://www.w3.org/2000/svg"
->
-  <defs>
-    <symbol
-      *ngFor="let icon of icons; trackBy: trackByFn"
-      [attr.id]="icon.name"
-      [attr.viewBox]="icon.viewBox"
-      [attr.fill]="icon.fill"
-      [innerHtml]="icon.html"
-    >
-    </symbol>
-  </defs>
-</svg>
+  [innerHTML]="render"
+></div>

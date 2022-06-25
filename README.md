@@ -16,6 +16,7 @@ Inspired by this article: https://css-tricks.com/too-many-svgs-clogging-up-your-
 * Lazy-rendering and lazy-loading.
 * No additional wrapper components, direct access to `svg` element.
 * No magic coloring or sizing.
+* SSR support.
 
 > [StackBlitz demo](https://stackblitz.com/edit/icong-demo?file=src/app/app.component.ts)
 
