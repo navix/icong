@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { IconsRegistry } from '../icons-registry';
 
@@ -15,14 +16,21 @@ export class IconsHostComponent implements OnInit {
     fill?: string;
   }[] = [];
 
+  isBrowser = false;
+
   constructor(
     private registry: IconsRegistry,
     private cdr: ChangeDetectorRef,
     private sanitizer: DomSanitizer,
+    @Inject(PLATFORM_ID) platformId: any,
   ) {
+    this.isBrowser = isPlatformBrowser(platformId);
   }
 
   ngOnInit() {
+    if (!this.isBrowser) {
+      return;
+    }
     this.registry
       .reqIcons$
       .subscribe(icons => {
@@ -49,7 +57,10 @@ export class IconsHostComponent implements OnInit {
       });
   }
 
-  trackByFn(index, item: {name: string}) {
+  trackByFn(
+    index,
+    item: {name: string},
+  ) {
     return item.name;
   }
 }

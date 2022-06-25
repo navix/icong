@@ -10,6 +10,7 @@
     "lib:publish": "npm publish ./dist/icong --access=public",
     "lib:publish:beta": "npm publish ./dist/icong --access=public --tag=beta",
     "lib:release": "npm run lib:build && npm run lib:publish",
+    "lib:release:beta": "npm run lib:build && npm run lib:publish:beta",
     "website:serve": "ng run website:serve",
     "website:build": "ng run website:build:production",
     "website:deploy": "ng run website:deploy --cname=icong.oleksanovyk.com"
