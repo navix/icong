@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { DomSanitizer } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
 import { IconsRegistry } from '../icons-registry';
@@ -32,7 +32,7 @@ describe('IconsHostComponent', () => {
     expect(component.icons).toEqual([]);
   });
 
-  it('should add requested icons', () => {
+  it('should add requested icons', waitForAsync(() => {
     ir.reqIcons.next([
       {
         name: 'TEST',
@@ -41,17 +41,19 @@ describe('IconsHostComponent', () => {
         requested: true,
       },
     ]);
-    expect(component.icons).toEqual([
-      {
-        name: 'TEST',
-        html: 'XML_CONTENT',
-        fill: undefined,
-        viewBox: undefined,
-      },
-    ]);
-  });
+    setTimeout(() => {
+      expect(component.icons).toEqual([
+        {
+          name: 'TEST',
+          html: 'XML_CONTENT',
+          fill: undefined,
+          viewBox: undefined,
+        },
+      ]);
+    }, 1);
+  }));
 
-  it('should extract icon content (all except <svg>) and fill and viewBox attributes', () => {
+  it('should extract icon content (all except <svg>) and fill and viewBox attributes', waitForAsync(() => {
     ir.reqIcons.next([
       {
         name: 'TEST',
@@ -60,15 +62,17 @@ describe('IconsHostComponent', () => {
         requested: true,
       },
     ]);
-    expect(component.icons).toEqual([
-      {
-        name: 'TEST',
-        html: '<path d="M12 4C13.6477"></path>',
-        fill: 'currentColor',
-        viewBox: '0 0 24 24',
-      },
-    ]);
-  });
+    setTimeout(() => {
+      expect(component.icons).toEqual([
+        {
+          name: 'TEST',
+          html: '<path d="M12 4C13.6477"></path>',
+          fill: 'currentColor',
+          viewBox: '0 0 24 24',
+        },
+      ]);
+    }, 1);
+  }));
 });
 
 class IconsRegistryStub {

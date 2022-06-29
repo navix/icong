@@ -1,5 +1,4 @@
-import { isPlatformBrowser } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { debounceTime } from 'rxjs';
 import { IconsRegistry } from '../icons-registry';
@@ -17,17 +16,13 @@ export class IconsHostComponent implements OnInit {
     fill?: string;
   }[] = [];
 
-  isBrowser = false;
-
   renders: SafeHtml[] = [];
 
   constructor(
     private registry: IconsRegistry,
     private cdr: ChangeDetectorRef,
     private sanitizer: DomSanitizer,
-    @Inject(PLATFORM_ID) platformId: any,
   ) {
-    this.isBrowser = isPlatformBrowser(platformId);
   }
 
   ngOnInit() {
