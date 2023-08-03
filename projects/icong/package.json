@@ -1,6 +1,6 @@
 {
   "name": "icong",
-  "version": "14.2.0-beta.3",
+  "version": "14.2.0",
   "description": "Efficient Angular SVG Icons.",
   "keywords": ["angular", "icons", "svg"],
   "author": {
