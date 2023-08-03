@@ -32,7 +32,7 @@ describe('IconsHostComponent', () => {
     expect(component.icons).toEqual([]);
   });
 
-  it('should add requested icons', waitForAsync(() => {
+  it('should ignore invalid svg', waitForAsync(() => {
     ir.reqIcons.next([
       {
         name: 'TEST',
@@ -42,14 +42,7 @@ describe('IconsHostComponent', () => {
       },
     ]);
     setTimeout(() => {
-      expect(component.icons).toEqual([
-        {
-          name: 'TEST',
-          html: 'XML_CONTENT',
-          fill: undefined,
-          viewBox: undefined,
-        },
-      ]);
+      expect(component.icons).toEqual([]);
     }, 1);
   }));
 
@@ -57,7 +50,13 @@ describe('IconsHostComponent', () => {
     ir.reqIcons.next([
       {
         name: 'TEST',
-        xml: '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" height="24" width="24"><path d="M12 4C13.6477"></path></svg>',
+        xml: '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4C13.6477"></path></svg>',
+        url: undefined,
+        requested: true,
+      },
+      {
+        name: 'TEST2',
+        xml: '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" height="24" width="24" stroke="#000"><path d="M12 4C13.6477"></path></svg>',
         url: undefined,
         requested: true,
       },
@@ -69,6 +68,18 @@ describe('IconsHostComponent', () => {
           html: '<path d="M12 4C13.6477"></path>',
           fill: 'currentColor',
           viewBox: '0 0 24 24',
+          height: undefined,
+          width: undefined,
+          stroke: undefined,
+        },
+        {
+          name: 'TEST2',
+          html: '<path d="M12 4C13.6477"></path>',
+          fill: 'currentColor',
+          viewBox: '0 0 24 24',
+          height: '24',
+          width: '24',
+          stroke: '#000',
         },
       ]);
     }, 1);

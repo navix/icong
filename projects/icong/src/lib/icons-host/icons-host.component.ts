@@ -14,6 +14,9 @@ export class IconsHostComponent implements OnInit {
     html: SafeHtml;
     viewBox?: string;
     fill?: string;
+    stroke?: string;
+    width?: string;
+    height?: string;
   }[] = [];
 
   renders: SafeHtml[] = [];
@@ -35,15 +38,24 @@ export class IconsHostComponent implements OnInit {
           const prepared = icon.xml
             .trim()
             .replace(/(\r\n|\n|\r)/gm, '');
+          const svgRoot = prepared.match(/^<svg.*?>/)?.[0];
+          if (!svgRoot) {
+            return undefined;
+          }
           return {
             name: icon.name,
             html: prepared
               .replace(/^<svg.*?>/, '')
               .replace(/<\/svg.*?>$/, ''),
-            viewBox: prepared.match(/^<svg.*?viewBox="(.*?)".*?>/)?.[1],
-            fill: prepared.match(/^<svg.*?fill="(.*?)".*?>/)?.[1],
+            // Match viewBox only from root svg tag
+            viewBox: svgRoot.match(/viewBox="(.*?)"/)?.[1],
+            fill: svgRoot.match(/fill="(.*?)"/)?.[1],
+            stroke: svgRoot.match(/stroke="(.*?)"/)?.[1],
+            width: svgRoot.match(/width="(.*?)"/)?.[1],
+            height: svgRoot.match(/height="(.*?)"/)?.[1],
           };
-        });
+        })
+        .filter(icon => !!icon);
       this.renders.push(this.sanitizer.bypassSecurityTrustHtml(`
         <svg
           height="200"
@@ -58,6 +70,9 @@ export class IconsHostComponent implements OnInit {
                 id="${icon.name}"
                 ${icon.viewBox ? `viewBox="${icon.viewBox}"` : ''}
                 ${icon.fill ? `fill="${icon.fill}"` : ''}
+                ${icon.stroke ? `stroke="${icon.stroke}"` : ''}
+                ${icon.width ? `width="${icon.width}"` : ''}
+                ${icon.height ? `height="${icon.height}"` : ''}
               >
                 ${icon.html}
               </symbol>
